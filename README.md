@@ -1,6 +1,6 @@
 # HyvesClone
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+HBO-ICT project 2.4, Hyves Clone.
 
 ## Development server
 

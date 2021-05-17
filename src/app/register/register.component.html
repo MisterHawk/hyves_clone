@@ -1,9 +1,24 @@
 <p>Rigistreren pagina</p>
 <p>Hier kunnen toekomstig leden zich registreren op het platform</p>
-<form>
-    <input type="text" placeholder="Voornaam" name="first_name"><br>
-    <input type="text" placeholder="Achternaam" name="last_name"><br>
-    <input type="date"><br>
-    <input type="text" placeholder="Gebruikersnaam" name="username"><br>
-    <input type="password" placeholder="Wachtwoord" name="first_name"><br>
+<form [formGroup]="registerForm">
+    <label>
+        Voornaam:
+        <input type="text" formControlName="first_name">
+    </label><br>
+    <label>
+        Achternaam:
+        <input type="text" formControlName="last_name">
+    </label><br>
+    <label>
+        Gerbuikersnaam:
+        <input type="text" formControlName="last_name">
+    </label><br>
+    <label>
+        Email:
+        <input type="email" formControlName="last_name">
+    </label><br>
+    <label>
+        Wachtwoord:
+        <input type="password" formControlName="last_name">
+    </label><br>
 </form>

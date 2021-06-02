@@ -51,5 +51,5 @@
     </div>
   </div>
 </nav>
-<h3 *ngIf="auth.user$ | async as user">Welkom {{ user.nickname }}!</h3>
+<h3 *ngIf="auth.user$ | async as user">Welkom {{ user.name }}!</h3>
 <router-outlet></router-outlet>

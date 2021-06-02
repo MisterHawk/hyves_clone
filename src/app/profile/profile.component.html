@@ -1,6 +1,7 @@
 <p>Hallo</p>
 
 <ul *ngIf="auth.user$ | async as user">
-  <h1>{{ user.name }}</h1>
+  <h1>{{ user.nickname }}</h1>
   <h1>{{ user.email }}</h1>
+  <img src="{{ user.picture }}" alt="" />
 </ul>

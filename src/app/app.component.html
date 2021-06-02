@@ -19,12 +19,6 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a
-        class="nav-item nav-link"
-        routerLink="/register"
-        routerLinkActive="active"
-        >Registreren</a
-      ><br />
       <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
         <button (click)="auth.logout({ returnTo: document.location.origin })">
           Log out

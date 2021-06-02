@@ -7,14 +7,12 @@ import { AppComponent } from './app.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthButtonComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 
 import { AuthModule } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   {path: 'timeline', component: TimelineComponent},
-  {path: 'register', component: RegisterComponent},
   {path: 'login', component: AuthButtonComponent},
   {path: 'account', component: AccountComponent},
   {path: 'profile', component: ProfileComponent},
@@ -27,7 +25,6 @@ const routes: Routes = [
     TimelineComponent,
     ProfileComponent,
     AuthButtonComponent,
-    RegisterComponent,
     AccountComponent
   ],
   imports: [

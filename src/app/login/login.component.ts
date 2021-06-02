@@ -4,19 +4,10 @@ import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-auth-button',
-//  templateUrl: './login.component.html'
-template: `
-    <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-      <button (click)="auth.logout({ returnTo: document.location.origin })">
-        Log out
-      </button>
-    </ng-container>
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 
-    <ng-template #loggedOut>
-      <button (click)="auth.loginWithRedirect()">Log in</button>
-    </ng-template>
-  `,
-  styles: [],
+
 })
 export class AuthButtonComponent {
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}

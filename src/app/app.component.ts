@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root, app-auth-button',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'hyves-clone';
   currentUser = 'Hein Douwe';
+  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
 }

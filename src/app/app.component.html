@@ -1,55 +1,53 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a
-    class="navbar-brand"
-    routerLink="/profile"
-    routerLinkActive="active"
-    style="text-decoration: none"
-    ><h1>Hyves</h1></a
-  >
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-        <button (click)="auth.logout({ returnTo: document.location.origin })">
-          Log out
-        </button>
-      </ng-container>
-
-      <ng-template #loggedOut>
-        <button (click)="auth.loginWithRedirect()">
-          Log in/Registreren
-        </button> </ng-template
-      ><br />
-      <a
-        class="nav-item nav-link"
-        routerLink="/account"
-        routerLinkActive="active"
-        >Account</a
-      ><br />
-      <a
-        class="nav-item nav-link"
-        routerLink="/profile"
-        routerLinkActive="active"
-        >Profiel</a
-      ><br />
-      <a
-        class="nav-item nav-link"
-        routerLink="/timeline"
-        routerLinkActive="active"
-        >Tijdlijn</a
-      ><br />
+<<<<<<< HEAD
+<!-- Navbar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #F78934">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand mt-2 mt-lg-0" style="text-decoration: none;" routerLink="/app" routerLinkActive="active">
+      <h1 style="color: white">Hyves</h1>
+    </a>
+    <!-- Toggle button -->
+    <button class="navbar-toggler sr-only" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left elements -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register" routerLinkActive="active">Registreren</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/settings" routerLinkActive="active">Instellingen</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profiel</a>
+        </li>
+      </ul>
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+          <!-- Avatar -->
+          <div>
+            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" style="color:white" role="button">
+              <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" class="rounded-circle" height="30" alt="" loading="lazy"/>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" routerLink="/profile" routerLinkActive="active">Profiel</a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/settings" routerLinkActive="active">Instellingen</a>
+              </li>
+              <li>
+                <a (click)="auth.logout({ returnTo: document.location.origin })" class="dropdown-item">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
 </nav>
-<h3 *ngIf="auth.user$ | async as user">Welkom {{ user.name }}!</h3>
 <router-outlet></router-outlet>

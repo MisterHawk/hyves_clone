@@ -8,7 +8,5 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'hyves-clone';
-  currentUser = 'Hein Douwe';
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
 }

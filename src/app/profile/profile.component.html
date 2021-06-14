@@ -1,0 +1,64 @@
+<div class="container">
+    <div id="content" class="content p-0">
+        <!-- User profile -->
+        <div class="profile-header">
+            <div class="profile-header-cover">
+                <img src="https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png">
+            </div>
+            <div class="profile-header-content">
+                <div class="profile-header-img mb-4">
+                    <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" class="mb-4" alt=""/>
+                </div>
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">{{ user }}</h4>
+                    <p class="m-b-sm">{{ userTagline }}</p>
+                </div>
+            </div>
+            <!-- Profile navigation links -->
+            <ul class="profile-header-tab nav nav-tabs">
+                <ng-container *ngFor="let nav of profileNavs; let i = index">
+                    <li class="nav-item" [class.active]="index === i" (click)="setIndex(i)" 
+                    [ngClass]="nav.type === 'mobile' ? 'd-xl-none' : (nav.type === 'desktop' ? 'd-none d-xl-block' : '')">
+                        <a class="nav-link" type="button">{{ nav.name }}</a>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <!-- User content -->
+        <div>
+            <!-- Profile, id(0) -->
+            <div *ngIf="index === 0">
+                <p>profile</p>
+            </div>
+            <!-- Info, id(1) -->
+            <div *ngIf="index === 1">
+                <p>info</p>
+            </div>
+            <!-- Timeline, id(2) -->
+            <div *ngIf="index === 2">
+                <p>tijdlijn</p>
+            </div>
+            <!-- Media, id(3) -->
+            <div *ngIf="index === 3">
+                <p>media</p>
+            </div>
+            <!-- Friends, id(4) -->
+            <div *ngIf="index === 4">
+                <div class="row row-space-1">
+                    <div class="col-md-6 m-b-2" *ngFor="let friend of friends">
+                        <div class="p-10">
+                            <div class="media media-xs overflow-visible">
+                                <a class="media-left">
+                                    <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" alt="" class="media-object img-circle">
+                                </a>
+                                <div class="media-body valign-middle">
+                                    <b class="text-inverse">{{ friend.name }}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

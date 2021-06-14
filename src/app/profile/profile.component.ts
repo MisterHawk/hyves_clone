@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
     this.index = id
   }
 
-  private profileNavs: any[] = [
+  profileNavs: any[] = [
     { id: 0, type: "desktop", name: "PROFIEL" },
     { id: 1, type: "mobile", name: "INFO" },
     { id: 2, type: "mobile", name: "TIJDLIJN" },
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
     { id: 4, type: "", name: "VRIENDEN" }
   ];
 
-  private friends: any[] = [
+  friends: any[] = [
     { id: 0, name: "TEST1" },
     { id: 1, name: "TEST2" },
     { id: 2, name: "TEST3" },

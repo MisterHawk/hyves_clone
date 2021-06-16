@@ -1,9 +1,17 @@
 <!-- Navbar -->
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #F78934">
+<nav
+  class="navbar sticky-top navbar-expand-lg navbar-dark"
+  style="background-color: #f78934"
+>
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand mt-2 mt-lg-0" style="text-decoration: none;" routerLink="/app" routerLinkActive="active">
+    <a
+      class="navbar-brand mt-2 mt-lg-0"
+      style="text-decoration: none"
+      routerLink="/account"
+      routerLinkActive="active"
+    >
       <h1 style="color: white">Hyves</h1>
     </a>
     <!-- Toggle button -->
@@ -15,13 +23,19 @@
       <!-- Left elements -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Registreren</a>
+          <a class="nav-link" routerLink="/timeline" routerLinkActive="active"
+            >Tijdlijn</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/settings" routerLinkActive="active">Instellingen</a>
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active"
+            >Profiel</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profiel</a>
+          <a class="nav-link" routerLink="/account" routerLinkActive="active"
+            >Account</a
+          >
         </li>
       </ul>
       <!-- Right elements -->
@@ -29,26 +43,48 @@
         <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
           <!-- Avatar -->
           <div>
-            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" style="color:white" role="button">
-              <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" class="rounded-circle" height="30" alt="" loading="lazy"/>
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              style="color: white"
+              role="button"
+            >
+              <img
+                src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png"
+                class="rounded-circle"
+                height="30"
+                alt=""
+                loading="lazy"
+              />
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" routerLink="/profile" routerLinkActive="active">Profiel</a>
+                <a
+                  class="dropdown-item"
+                  routerLink="/profile"
+                  routerLinkActive="active"
+                  >Profiel</a
+                >
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/settings" routerLinkActive="active">Instellingen</a>
+                <a
+                  class="dropdown-item"
+                  routerLink="/settings"
+                  routerLinkActive="active"
+                  >Instellingen</a
+                >
               </li>
               <li>
-                <a (click)="auth.logout({ returnTo: document.location.origin })" class="dropdown-item">Logout</a>
+                <a
+                  (click)="auth.logout({ returnTo: document.location.origin })"
+                  class="dropdown-item"
+                  >Logout</a
+                >
               </li>
             </ul>
           </div>
         </ng-container>
         <ng-template #loggedOut>
-          <button (click)="auth.loginWithRedirect()">
-            Log in/Registreren
-          </button> 
+          <button (click)="auth.loginWithRedirect()">Log in/Registreren</button>
         </ng-template>
       </div>
     </div>

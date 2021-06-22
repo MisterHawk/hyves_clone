@@ -16,7 +16,7 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 const routes: Routes = [
   { path: 'timeline', component: TimelineComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:id', component: ProfileComponent },
   { path: '', redirectTo: '/app', pathMatch: 'full' },
 ];
 

@@ -7,11 +7,12 @@
             </div>
             <div class="profile-header-content">
                 <div class="profile-header-img mb-4">
-                    <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" class="mb-4" alt=""/>
+                    <img src="{{ profile.picture_url }}" class="mb-4" alt=""/>
                 </div>
                 <div class="profile-header-info">
-                    <h4 class="m-t-sm">{{ user }}</h4>
-                    <p class="m-b-sm">{{ userTagline }}</p>
+                    <h4 class="m-t-sm">{{ profile.first_name + " " + profile.last_name }}</h4>
+                    <p class="m-b-sm">{{ profile.username }}</p>
+                    <p class="m-b-sm">{{ profile.user_bio }}</p>
                 </div>
             </div>
             <!-- Profile navigation links -->
@@ -43,22 +44,24 @@
                 <p>media</p>
             </div>
             <!-- Friends, id(4) -->
-            <div *ngIf="index === 4">
+            <div class="container-fluid" *ngIf="index === 4">
                 <div class="row row-space-1">
-                    <div class="col-md-6 m-b-2" *ngFor="let friend of friends">
+                    <div class="col-md-4 m-b-2" *ngFor="let friends of friends">
                         <div class="p-10">
-                            <div class="media media-xs overflow-visible">
-                                <a class="media-left">
-                                    <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" alt="" class="media-object img-circle">
-                                </a>
-                                <div class="media-body valign-middle">
-                                    <b class="text-inverse">{{ friend.name }}</b>
+                            <a href="/profile/{{ friends.id }}" style="text-decoration: none;">
+                                <div class="media media-xs overflow-hidden">
+                                    <div class="media-left">
+                                        <img src="{{ friends.picture_url }}" class="media-object img-square">
+                                    </div>
+                                    <div class="media-body valign-middle">
+                                        <b class="text-inverse">{{ friends.first_name + " " + friends.last_name }}</b>
+                                    </div>                                    
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

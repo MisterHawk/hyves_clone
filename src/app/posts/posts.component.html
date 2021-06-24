@@ -1,31 +1,49 @@
 
 <div class="d-grid gap-3">
 
-    <div *ngFor="let post of posts" class="card w-75 mx-auto">  
+    <div *ngFor="let post of posts" class="card w-50 mx-auto">  
 
         <div class="media">
-            <div class="row">
-                <div class="col">
-                    <img class="mr-3" height="75px" src="{{post.user_picture}}" alt="Generic placeholder image">
+
+            <!-- Name of poster w/ image (disabled for now) -->
+            <div class="card-header">
+
+                <div class="paragraphs">
+                    <div class="row">
+                        <div class="span4">
+                            <img class="mr-3" style="float:left" height="75px" src="{{post.user_image}}">
+                            <div class="content-heading"><p class="mt-0"><br><a href="#" class="card-link">{{post.user}}</a></p></div>
+                            <p style="clear:both"></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col"><h5 class="mt-0"><a href="#" class="card-link">{{post.user}}</a></h5></div>
-                
-                <div class="media-body">
-                    
 
             </div>
-                <div class="card-body card-text">
-                    <p class="text-left">{{post.content}}</p>
+
+            <!-- Post content w/ optional image -->
+            <div class="card-body card-text">
+
+                <p class="text-left">{{post.content}}</p>
+
+                <div *ngIf="post.image && post.image?.length !== 0">
+                    <img src="{{post.image}}" class="card-img-top">
                 </div>
             </div>
-            
+
+            <!-- Like/Dislike/Comment button -->
+            <div class="card-footer text-muted">
+
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" (click)="postInput()" value="like">👍</button>
+                    <button type="button" class="btn btn-primary" (click)="postInput()" value="dislike">👎</button>
+                    <!-- <button type="button" class="btn btn-primary" (click)="clickEvent()">💬</button> -->
+                </div>
+                <h2>{{msg}}</h2>
+
+            </div>
+
         </div>
-        
-        <div class="card-footer text-muted text-left">
-            <button type="button" class="btn btn-outline-primary">👍</button>
-            <button type="button" class="btn btn-outline-primary">👎</button>
-            <button type="button" class="btn btn-outline-primary">💬</button>
-        </div>
+
     </div>
 
 </div>  

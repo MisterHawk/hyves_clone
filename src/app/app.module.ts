@@ -12,6 +12,7 @@ import { AccountComponent } from './account/account.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: 'timeline', component: TimelineComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },

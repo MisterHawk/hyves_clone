@@ -1,0 +1,33 @@
+
+<div class="d-grid gap-3">
+
+    <div *ngFor="let post of posts" class="card w-75 mx-auto">  
+
+        <div class="media">
+            <div class="row">
+                <div class="col">
+                    <img class="mr-3" height="75px" src="{{post.user_picture}}" alt="Generic placeholder image">
+                </div>
+                <div class="col"><h5 class="mt-0"><a href="#" class="card-link">{{post.user}}</a></h5></div>
+                
+                <div class="media-body">
+                    
+
+            </div>
+                <div class="card-body card-text">
+                    <p class="text-left">{{post.content}}</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="card-footer text-muted text-left">
+            <button type="button" class="btn btn-outline-primary">👍</button>
+            <button type="button" class="btn btn-outline-primary">👎</button>
+            <button type="button" class="btn btn-outline-primary">💬</button>
+        </div>
+    </div>
+
+</div>  
+
+

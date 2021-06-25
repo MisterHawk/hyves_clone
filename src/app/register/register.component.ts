@@ -9,11 +9,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
-    first_name: new FormControl(''),
-    last_name: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl('')
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    birthday: new FormControl(''),
+    bio: new FormControl(''),
   });
 
   constructor() { }

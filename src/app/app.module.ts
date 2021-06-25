@@ -7,17 +7,18 @@ import { AppComponent } from './app.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
+import { RegisterComponent } from './register/register.component';
 
 // Angular
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: 'timeline', component: TimelineComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'profile/:id', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent },
+  {path: 'register', component: RegisterComponent},
   { path: '', redirectTo: '/app', pathMatch: 'full' },
 ];
 
@@ -27,6 +28,7 @@ const routes: Routes = [
     TimelineComponent,
     ProfileComponent,
     AccountComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,6 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },

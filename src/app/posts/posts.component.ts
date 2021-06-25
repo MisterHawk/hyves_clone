@@ -10,16 +10,16 @@ import { POSTS } from '../mock-posts';
 
 export class PostsComponent implements OnInit {
 
-  msg!:string;
+  // msg!:string;
+  btnParent: any;
 
   posts = POSTS;
 
   constructor() {}
 
-  postInput(){
-    this.msg='Button is Clicked';
-    return this.msg;
-  }
+  onItemChange(value: string){
+    console.log(" Value is : ", value );
+ }
 
   ngOnInit(): void {
   }

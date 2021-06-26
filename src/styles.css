@@ -4,20 +4,20 @@
 }
 
 a {
-    text-decoration: none;
-    color: #f78934dc;
+  text-decoration: none;
+  color: #f78934dc;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 p {
-    color: grey;
+  color: grey;
 }
 
 input {
-    color: grey;
+  color: grey;
 }
 
 /* You can add global styles to this file, and also import other style files */

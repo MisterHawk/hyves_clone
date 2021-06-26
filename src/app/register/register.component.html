@@ -1,0 +1,50 @@
+<p>Wij willen je graag beter leren kennen!</p>
+<p>Vul hier extra gegevens in</p>
+
+<div class="container">
+  <form [formGroup]="registerForm">
+    <div class="col">
+      <label for="firstname">Voornaam: </label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="firstname"
+        required
+        placeholder="Peter"
+      />
+
+      <label for="lastname">Achternaam: </label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="lastname"
+        required
+        placeholder="Pan"
+      />
+      <br />
+      <label for="birthday">Geboortedatum: </label>
+      <input
+        class="form-control"
+        type="date"
+        formControlName="birthday"
+        required
+      />
+      <br />
+      <label for="bio">Korte biografie: </label>
+      <input
+        class="form-control"
+        type="textarea"
+        maxlength="25"
+        formControlName="bio"
+        placeholder="vul hier een korte bio in."
+        required
+        aria-describedby="bioHelp"
+      />
+      <small id="bioHelp" class="form-text text-muted">
+        Je biografie mag uit maximaal 25 tekens bestaan.
+      </small>
+      <br />
+      <input type="submit" value="Opslaan" />
+    </div>
+  </form>
+</div>

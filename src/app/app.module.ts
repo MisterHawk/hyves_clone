@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
+import { RegisterComponent } from './register/register.component';
 
 // Angular
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/app', pathMatch: 'full' },
 ];
 
@@ -31,6 +33,7 @@ const routes: Routes = [
     ProfileComponent,
     AccountComponent,
     SettingsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

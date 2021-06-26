@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { ApiService } from '../api.service';
 import { Profile } from '../profile';
+import { Title } from '@angular/platform-browser';
+import { faUserCog, faUserMinus, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-profile',
@@ -11,14 +14,61 @@ import { Profile } from '../profile';
 })
 
 export class ProfileComponent implements OnInit {
+  index: number;
+  id: string;
+  profile: Profile;
+  friends: any[];
+  friend_status: Status;
+  // Icons
+  faUserCog = faUserCog;
+  faUserPlus = faUserPlus;
+  faUserMinus = faUserMinus;
 
-  index: number = window.innerWidth >= 1200 ? 0 : 2;
-  id: string = "";
-  profile: Profile = new Profile;
-  friends: any[] = [];
+  constructor(public auth: AuthService, private apiService: ApiService, private router: Router, private route: ActivatedRoute, private readonly titleService: Title) {
+    this.index = this.resetIndex()
+    this.id = "";
+    this.profile = new Profile;
+    this.friends = [];
+    this.friend_status = Status.Default;
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id')!
+    })
+    // TODO: remove this
+    localStorage.setItem('id', '1')
+   }
 
-  setIndex(id: number) {
+  setIndex(id: number): void {
     this.index = id
+  }
+
+  resetIndex(): number {
+    return window.innerWidth >= 1200 ? 0 : 2;
+  }
+
+  addFriend(): void {
+    // TODO: send request to apiservice
+    this.friend_status = Status.Added;
+    this.logFriendStatus();
+  }
+
+  removeFriend(): void {
+    // TODO: send  request to apiservice
+    this.friend_status = Status.Removed;
+    this.logFriendStatus();
+  }
+
+  logFriendStatus(): void {
+    console.log("User(" + this.id + ") " + Status[this.friend_status]);
+  }
+
+  // TODO: this.friends refers to current profile's friends. Not the friends of the logged in user.
+  // Send get request instead to retreive if logged in user is friends with current id
+  checkFriends(id: string): boolean {
+    return this.friends.find(x => x.id == id) != null ? true : false;
+  }
+
+  checkId(): boolean {
+    return localStorage.getItem('id') == this.id;
   }
 
   profileNavs: any[] = [
@@ -29,17 +79,7 @@ export class ProfileComponent implements OnInit {
     { id: 4, type: "", name: "VRIENDEN" }
   ];
   
-  loggedIn = true;
-
-  constructor(public auth: AuthService, private apiService: ApiService, private route: ActivatedRoute ) { }
-
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      params => {
-        this.id = params.get('id')!
-      }
-    )
-
     this.apiService.readUser(this.id).subscribe((profile: Profile) => {
       this.profile = profile;
     })
@@ -50,13 +90,21 @@ export class ProfileComponent implements OnInit {
           id: profiles[i]['id'],
           first_name: profiles[i]['first_name'],
           last_name: profiles[i]['last_name'],
-          username: profiles[i]['username'],
           picture_url: profiles[i]['picture_url'],
-          user_bio: profiles[i]['user_bio']
+          user_bio: profiles[i]['user_bio'],
+          gender: profiles[i]['gender'],
+          birthday: profiles[i]['birthday'],
+          join_date: profiles[i]['user_bio']
         });
       }
-      console.log(this.friends);
     })
+  
+    this.titleService.setTitle(this.profile.first_name + " " + this.profile.last_name)
   }
+}
 
+enum Status {
+  Default = 0,
+  Added = 1,
+  Removed = 2
 }

@@ -2,25 +2,42 @@
     <div id="content" class="content p-0">
         <!-- User profile -->
         <div class="profile-header">
+            <!-- User profile cover -->
             <div class="profile-header-cover">
-                <img src="https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png">
+                <img src="assets/Default-Banner.png" alt="Standaard banner">
             </div>
             <div class="profile-header-content">
+                <!-- User profile buttons -->
+                <ng-container *ngIf="auth.isAuthenticated$ | async;">
+                    <!-- Add friend -->
+                    <button *ngIf="!checkFriends(id) || friend_status == 2" title="Voeg vriend toe" class="profile-interaction-button" style="background-color: #059862;" (click)="addFriend()">
+                        <fa-icon [icon]="faUserPlus" style="color:white;"></fa-icon>
+                    </button>
+                    <!-- Remove friend -->
+                    <button *ngIf="checkFriends(id) || friend_status == 1" title="Verwijder vriend" class="profile-interaction-button" style="background-color: #eb4135;" (click)="removeFriend()">
+                        <fa-icon [icon]="faUserMinus" style="color:white;"></fa-icon>
+                    </button>
+                    <!-- Settings -->
+                    <button *ngIf="checkId()" title="Bewerk profiel" class="profile-interaction-button" style="background-color: #F78934;" [routerLink]="['/settings']">
+                        <fa-icon [icon]="faUserCog" style="color:white;"></fa-icon>
+                    </button>
+                </ng-container>
+                <!-- User profile picture -->
                 <div class="profile-header-img mb-4">
-                    <img src="{{ profile.picture_url }}" class="mb-4" alt=""/>
+                    <img src="{{ profile.picture_url }}" class="mb-4 profile-picture" alt="{{ profile.first_name + ' ' + profile.last_name }}"/>
                 </div>
+                <!-- User info -->
                 <div class="profile-header-info">
-                    <h4 class="m-t-sm">{{ profile.first_name + " " + profile.last_name }}</h4>
-                    <p class="m-b-sm">{{ profile.username }}</p>
-                    <p class="m-b-sm">{{ profile.user_bio }}</p>
+                    <h4 class="m-t-sm" style="color: #F78934; margin: 0 auto; width: 80%">{{ profile.first_name + ' ' + profile.last_name }}</h4>
+                    <p class="m-b-sm" style="color: white; margin: 0 auto; width: 80%">{{ profile.user_bio }}</p>
                 </div>
             </div>
             <!-- Profile navigation links -->
             <ul class="profile-header-tab nav nav-tabs">
                 <ng-container *ngFor="let nav of profileNavs; let i = index">
-                    <li class="nav-item" [class.active]="index === i" (click)="setIndex(i)" 
+                    <li class="nav-item" [class.active]="index === i" (click)="setIndex(i)" (keyup.enter)="setIndex(i)" 
                     [ngClass]="nav.type === 'mobile' ? 'd-xl-none' : (nav.type === 'desktop' ? 'd-none d-xl-block' : '')">
-                        <a class="nav-link" type="button">{{ nav.name }}</a>
+                        <a class="nav-link" type="button" tabindex="0">{{ nav.name }}</a>
                     </li>
                 </ng-container>
             </ul>
@@ -28,33 +45,98 @@
         <!-- User content -->
         <div>
             <!-- Profile, id(0) -->
-            <div *ngIf="index === 0">
-                <p>profile</p>
+            <div class="container-fluid" style="margin-top: 10px;"  *ngIf="index === 0">
+                <div class="info-container">
+                    <div class="card-deck">
+                        <div class="info-card">
+                            <h3>Over mij</h3>
+                            <hr>
+                            <div class="info-left">
+                                <p>Naam:</p>
+                                <p>Achternaam:</p>
+                                <p>Geboortedatum:</p>
+                                <p>Geslacht:</p>
+                            </div>
+                            <div class="info-right">
+                                <p>{{ profile.first_name }}</p>
+                                <p>{{ profile.last_name }}</p>
+                                <p>{{ (profile.birthday.toLocaleString()).slice(0, 10) }}</p>
+                                <p>{{ profile.gender }}</p>
+                            </div>
+                        </div>
+                        <div class="info-card" style="margin-top: 10px;">
+                            <h3 style="color: white;">Statistieken</h3>
+                            <hr>
+                            <div class="info-left">
+                                <p>Lid sinds:</p>
+                                <p>Aantal vrienden:</p>
+                            </div>
+                            <div class="info-right">
+                                <p> {{ (profile.join_date.toLocaleString()).slice(0, 10) }}</p>
+                                <p> {{ friends.length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container">
+                    <app-timeline></app-timeline>
+                </div>
             </div>
             <!-- Info, id(1) -->
-            <div *ngIf="index === 1">
-                <p>info</p>
+            <div class="container-fluid" style="margin-top: 10px;" *ngIf="index === 1">
+                <div class="info-container" style="width: 100%;">
+                    <div class="card-deck">
+                        <div class="info-card">
+                            <h3>Over mij</h3>
+                            <hr>
+                            <div class="info-left">
+                                <p>Naam:</p>
+                                <p>Achternaam:</p>
+                                <p>Geboortedatum:</p>
+                                <p>Geslacht:</p>
+                            </div>
+                            <div class="info-right">
+                                <p>{{ profile.first_name }}</p>
+                                <p>{{ profile.last_name }}</p>
+                                <p>{{ (profile.birthday.toLocaleString()).slice(0, 10) }}</p>
+                                <p>{{ profile.gender }}</p>
+                            </div>
+                        </div>
+                        <div class="info-card" style="margin-top: 10px;">
+                            <h3 style="color: white;">Statistieken</h3>
+                            <hr>
+                            <div class="info-left">
+                                <p>Lid sinds:</p>
+                                <p>Aantal vrienden:</p>
+                            </div>
+                            <div class="info-right">
+                                <p> {{ (profile.join_date.toLocaleString()).slice(0, 10) }}</p>
+                                <p> {{ friends.length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Timeline, id(2) -->
-            <div *ngIf="index === 2">
-                <p>tijdlijn</p>
+            <div class="container-fluid" *ngIf="index === 2">
+                <app-timeline></app-timeline>
             </div>
             <!-- Media, id(3) -->
-            <div *ngIf="index === 3">
+            <div class="container-fluid" *ngIf="index === 3">
                 <p>media</p>
             </div>
             <!-- Friends, id(4) -->
             <div class="container-fluid" *ngIf="index === 4">
                 <div class="row row-space-1">
-                    <div class="col-md-4 m-b-2" *ngFor="let friends of friends">
+                    <div class="col-md-4 m-b-2" *ngFor="let friend of friends">
                         <div class="p-10">
-                            <a href="/profile/{{ friends.id }}" style="text-decoration: none;">
+                            <a href="/profile/{{ friend.id }}" title="{{ friend.first_name + ' ' + friend.last_name }}">
                                 <div class="media media-xs overflow-hidden">
-                                    <div class="media-left">
-                                        <img src="{{ friends.picture_url }}" class="media-object img-square">
+                                    <div class="media-left friend-img">
+                                        <img src="{{ friend.picture_url }}" class="media-object profile-picture" alt="{{ friend.first_name + ' ' + friend.last_name }}">
                                     </div>
                                     <div class="media-body valign-middle">
-                                        <b class="text-inverse">{{ friends.first_name + " " + friends.last_name }}</b>
+                                        <b class="text-inverse">{{ friend.first_name + " " + friend.last_name }}</b>
                                     </div>                                    
                                 </div>
                             </a>

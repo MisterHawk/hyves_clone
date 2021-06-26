@@ -9,14 +9,18 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 
 // Angular
-import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { AuthHttpInterceptor, AuthGuard, AuthModule } from '@auth0/auth0-angular';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
-  { path: 'timeline', component: TimelineComponent },
-  { path: 'account', component: AccountComponent },
+  { path: 'timeline', component: TimelineComponent, canActivate: [AuthGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/app', pathMatch: 'full' },
 ];
 
@@ -26,6 +30,7 @@ const routes: Routes = [
     TimelineComponent,
     ProfileComponent,
     AccountComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +64,16 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    FontAwesomeModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,93 +1,90 @@
 <!-- Navbar -->
-<nav
-  class="navbar sticky-top navbar-expand-lg navbar-dark"
-  style="background-color: #f78934"
->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #f78934">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a
-      class="navbar-brand mt-2 mt-lg-0"
-      style="text-decoration: none"
-      routerLink="/account"
-      routerLinkActive="active"
-    >
+    <a class="navbar-brand mt-2 mt-lg-0" style="text-decoration: none" routerLink="/timeline">
       <h1 style="color: white">Hyves</h1>
     </a>
     <!-- Toggle button -->
-    <button class="navbar-toggler" type="button" alt="Open menu">
+    <button class="navbar-toggler" type="button" alt="Open menu" (click)="isMenuCollapsed = !isMenuCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <!-- Left elements -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/timeline" routerLinkActive="active"
-            >Tijdlijn</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" routerLinkActive="active"
-            >Profiel</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/account" routerLinkActive="active"
-            >Account</a
-          >
-        </li>
-      </ul>
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-          <!-- Avatar -->
-          <div>
-            <a
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              style="color: white"
-              role="button"
-            >
-              <img
-                src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png"
-                class="rounded-circle"
-                height="30"
-                alt=""
-                loading="lazy"
-              />
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Logged in user nav -->
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else signedOut">
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
+              <a class="nav-link nav-text" routerLink="/timeline">
+                <fa-icon [icon]="faStream" class="nav-text"></fa-icon> Tijdlijn
+              </a>
+            </li>
+            <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
+              <a class="nav-link nav-text" routerLink="/settings">
+                <fa-icon [icon]="faUserCog" class="nav-text"></fa-icon> Instellingen
+              </a>
+            </li>
+            <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
+              <a class="nav-link nav-text" routerLink="/profile">
+                <fa-icon [icon]="faUserAlt" class="nav-text"></fa-icon> Profiel
+              </a>
+            </li>
+            <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
+              <a type="button" class="nav-link nav-text" (click)="(auth.logout({ returnTo: document.location.origin })); isMenuCollapsed = true">
+                <fa-icon [icon]="faSignOutAlt" class="nav-text"></fa-icon> Uitloggen
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Avatar -->
+        <div class="d-flex align-items-center nav-avatar">
+          <div ngbDropdown display="dynamic" class="d-none d-lg-block">
+            <a ngbDropdownToggle class="d-flex align-items-center" style="color: white" role="button">
+              <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" class="rounded-circle" height="30" alt="" loading="lazy"/>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end dropdown-menu-right">
               <li>
-                <a
-                  class="dropdown-item"
-                  routerLink="/profile"
-                  routerLinkActive="active"
-                  >Profiel</a
-                >
+                <a ngbDropdownItem class="dropdown-item" style="text-align: left;  text-decoration: none" routerLink="/profile">
+                  <fa-icon [icon]="faUserAlt" class="nav-text-alt"></fa-icon> Profiel
+                </a>
               </li>
               <li>
-                <a
-                  class="dropdown-item"
-                  routerLink="/settings"
-                  routerLinkActive="active"
-                  >Instellingen</a
-                >
+                <a ngbDropdownItem class="dropdown-item" style="text-align: left; text-decoration: none;" routerLink="/settings">
+                  <fa-icon [icon]="faUserCog" class="nav-text-alt"></fa-icon> Instellingen
+                </a>
               </li>
               <li>
-                <a
-                  (click)="auth.logout({ returnTo: document.location.origin })"
-                  class="dropdown-item"
-                  >Logout</a
-                >
+                <a ngbDropdownItem class="dropdown-item" style="text-align: left;  text-decoration: none;" (click)="(auth.logout({ returnTo: document.location.origin })); isMenuCollapsed = true">
+                  <fa-icon [icon]="faSignOutAlt" class="nav-text-alt"></fa-icon> Uitloggen
+                </a>
               </li>
             </ul>
           </div>
-        </ng-container>
-        <ng-template #loggedOut>
-          <button (click)="auth.loginWithRedirect()">Log in/Registreren</button>
-        </ng-template>
-      </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </nav>
 <router-outlet></router-outlet>
+
+<!-- signed out template -->
+<ng-template #signedOut>
+  <!-- Desktop -->
+  <div class="login d-none d-lg-block">
+    <button class="login-button "(click)="auth.loginWithRedirect()">
+      <fa-icon [icon]="faSignInAlt" class="nav-text-alt"></fa-icon> Inloggen
+    </button>
+  </div>
+  <!-- Mobile -->
+  <div class="d-lg-none">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
+        <a class="nav-link nav-text" routerLink="/timeline">
+          <fa-icon [icon]="faSignInAlt" class="nav-text"></fa-icon> Inloggen
+        </a>
+      </li>
+    </ul>
+  </div>
+</ng-template>

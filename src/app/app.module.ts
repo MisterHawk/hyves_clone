@@ -63,26 +63,12 @@ const routes: Routes = [
       clientId: 'O4eRDhDCAGEK7WGvYkw0L2l2iKr84fc1',
       // Request this audience at user authentication time
       audience: 'https://dev--4x0kppm.eu.auth0.com/api/v2/',
-
       // Request this scope at user authentication time
       scope: 'read:current_user',
 
-      // Specify configuration for the interceptor
-      httpInterceptor: {
-        allowedList: [
-          {
-            // Match any request that starts 'https://dev--4x0kppm.eu.auth0.com/api/v2/' (note the asterisk)
-            uri: 'https://dev--4x0kppm.eu.auth0.com/api/v2/*',
-            tokenOptions: {
-              // The attached token should target this audience
-              audience: 'https://dev--4x0kppm.eu.auth0.com/api/v2/',
+      
+      redirectUri: 'http://localhost:4200/register',
 
-              // The attached token should have these scopes
-              scope: 'read:current_user',
-            },
-          },
-        ],
-      },
     }),
     RouterModule.forRoot(routes),
     ReactiveFormsModule,

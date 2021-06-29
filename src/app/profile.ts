@@ -4,7 +4,7 @@ export class Profile{
     last_name: string = ""
     picture_url:  string = "";
     user_bio:  string = "";
-    gender: string = ""
-    birthday: string = Date();
-    join_date: string = Date();
+    gender: string = "";
+    birth_date: Date = new Date;
+    date_created: Date = new Date;
 }

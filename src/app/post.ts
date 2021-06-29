@@ -1,12 +1,9 @@
-import { NumericLiteral } from "typescript";
-
-export interface Post {
-    id: number;
-    user: string;
-    user_id: number;
-    user_image: string;
-    image?: string;
-    content: string;
-    date: string;
-    likes: number;
-  }
+export class Post {
+    post_id: string = '';
+    user_id: string = '';
+    image_url: string = '';
+    content: string = '';
+    date: Date = new Date();
+    first_name: string = '';
+    picture_url: string = '';
+}

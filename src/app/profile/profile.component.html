@@ -10,15 +10,15 @@
                 <!-- User profile buttons -->
                 <ng-container *ngIf="auth.isAuthenticated$ | async;">
                     <!-- Add friend -->
-                    <button *ngIf="!checkFriends(id) || friend_status == 2" title="Voeg vriend toe" class="profile-interaction-button" style="background-color: #059862;" (click)="addFriend()">
+                    <button *ngIf="!checkFriends() || friend_status == 2" title="Voeg vriend toe" class="profile-interaction-button" style="background-color: #059862;" (click)="addFriend()">
                         <fa-icon [icon]="faUserPlus" style="color:white;"></fa-icon>
                     </button>
                     <!-- Remove friend -->
-                    <button *ngIf="checkFriends(id) || friend_status == 1" title="Verwijder vriend" class="profile-interaction-button" style="background-color: #eb4135;" (click)="removeFriend()">
+                    <button *ngIf="checkFriends() || friend_status == 1" title="Verwijder vriend" class="profile-interaction-button" style="background-color: #eb4135;" (click)="removeFriend()">
                         <fa-icon [icon]="faUserMinus" style="color:white;"></fa-icon>
                     </button>
                     <!-- Settings -->
-                    <button *ngIf="checkId()" title="Bewerk profiel" class="profile-interaction-button" style="background-color: #F78934;" [routerLink]="['settings']">
+                    <button *ngIf="checkId()" title="Bewerk profiel" class="profile-interaction-button" style="background-color: #F78934;" [routerLink]="['/settings']">
                         <fa-icon [icon]="faUserCog" style="color:white;"></fa-icon>
                     </button>
                 </ng-container>
@@ -60,7 +60,7 @@
                             <div class="info-right">
                                 <p>{{ profile.first_name }}</p>
                                 <p>{{ profile.last_name }}</p>
-                                <p>{{ (profile.birthday.toLocaleString()).slice(0, 10) }}</p>
+                                <p>{{ profile.birth_date }}</p>
                                 <p>{{ profile.gender }}</p>
                             </div>
                         </div>
@@ -72,14 +72,14 @@
                                 <p>Aantal vrienden:</p>
                             </div>
                             <div class="info-right">
-                                <p> {{ (profile.join_date.toLocaleString()).slice(0, 10) }}</p>
+                                <p> {{ (profile.date_created.toLocaleString()).slice(0, 10) }}</p>
                                 <p> {{ friends.length }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="timeline-container">
-                    <app-timeline></app-timeline>
+                    <app-posts></app-posts>
                 </div>
             </div>
             <!-- Info, id(1) -->
@@ -98,7 +98,7 @@
                             <div class="info-right">
                                 <p>{{ profile.first_name }}</p>
                                 <p>{{ profile.last_name }}</p>
-                                <p>{{ (profile.birthday.toLocaleString()).slice(0, 10) }}</p>
+                                <p>{{ profile.birth_date }}</p>
                                 <p>{{ profile.gender }}</p>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                                 <p>Aantal vrienden:</p>
                             </div>
                             <div class="info-right">
-                                <p> {{ (profile.join_date.toLocaleString()).slice(0, 10) }}</p>
+                                <p> {{ (profile.date_created.toLocaleString()).slice(0, 10) }}</p>
                                 <p> {{ friends.length }}</p>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
             </div>
             <!-- Timeline, id(2) -->
             <div class="container-fluid" *ngIf="index === 2">
-                <app-timeline></app-timeline>
+                <app-posts></app-posts>
             </div>
             <!-- Media, id(3) -->
             <div class="container-fluid" *ngIf="index === 3">

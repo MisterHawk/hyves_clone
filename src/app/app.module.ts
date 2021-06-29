@@ -20,6 +20,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { PostsComponent } from './posts/posts.component';
+import { MakePostComponent } from './make-post/make-post.component';
 
 const routes: Routes = [
   { path: 'timeline', component: TimelineComponent, canActivate: [AuthGuard] },
@@ -49,6 +51,8 @@ const routes: Routes = [
     HomeComponent,
     NotFoundComponent,
     NotificationsComponent,
+    PostsComponent,
+    MakePostComponent
   ],
   imports: [
     BrowserModule,

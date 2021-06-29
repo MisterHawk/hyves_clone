@@ -6,7 +6,6 @@ import { Profile } from '../profile';
 import { faUserCog, faUserMinus, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { TitleService } from '../title.service';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -45,12 +44,26 @@ export class ProfileComponent implements OnInit {
 
   addFriend(): void {
     // TODO: send request to apiservice
+    var postdata: FormData = new FormData();
+    postdata.append("id", '1');
+    postdata.append("id2", this.id);
+    this.apiService.addFriend(postdata).subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+    )
     this.friend_status = Status.Added;
     this.logFriendStatus();
   }
 
   removeFriend(): void {
     // TODO: send  request to apiservice
+    var postdata: FormData = new FormData();
+    postdata.append("id", '1');
+    postdata.append("id2", this.id);
+    this.apiService.deleteFriend(postdata).subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+    )
     this.friend_status = Status.Removed;
     this.logFriendStatus();
   }
@@ -59,10 +72,8 @@ export class ProfileComponent implements OnInit {
     console.log("User(" + this.id + ") " + Status[this.friend_status]);
   }
 
-  // TODO: this.friends refers to current profile's friends. Not the friends of the logged in user.
-  // Send get request instead to retreive if logged in user is friends with current id
-  checkFriends(id: string): boolean {
-    return this.friends.find(x => x.id == id) != null ? true : false;
+  checkFriends(): boolean {
+    return this.friends.find(x => x.id == localStorage.getItem('id')) != null ? true : false;
   }
 
   checkId(): boolean {
@@ -92,8 +103,8 @@ export class ProfileComponent implements OnInit {
           picture_url: profiles[i]['picture_url'],
           user_bio: profiles[i]['user_bio'],
           gender: profiles[i]['gender'],
-          birthday: profiles[i]['birthday'],
-          join_date: profiles[i]['user_bio']
+          birth_date: profiles[i]['birth_date'],
+          date_created: profiles[i]['date_created']
         });
       }
     })

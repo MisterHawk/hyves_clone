@@ -18,7 +18,7 @@
                         <fa-icon [icon]="faUserMinus" style="color:white;"></fa-icon>
                     </button>
                     <!-- Settings -->
-                    <button *ngIf="checkId()" title="Bewerk profiel" class="profile-interaction-button" style="background-color: #F78934;" [routerLink]="['/settings']">
+                    <button *ngIf="checkId()" title="Bewerk profiel" class="profile-interaction-button" style="background-color: #F78934;" [routerLink]="['settings']">
                         <fa-icon [icon]="faUserCog" style="color:white;"></fa-icon>
                     </button>
                 </ng-container>
@@ -130,7 +130,7 @@
                 <div class="row row-space-1">
                     <div class="col-md-4 m-b-2" *ngFor="let friend of friends">
                         <div class="p-10">
-                            <a href="/profile/{{ friend.id }}" title="{{ friend.first_name + ' ' + friend.last_name }}">
+                            <a href="profile/{{ friend.id }}" title="{{ friend.first_name + ' ' + friend.last_name }}">
                                 <div class="media media-xs overflow-hidden">
                                     <div class="media-left friend-img">
                                         <img src="{{ friend.picture_url }}" class="media-object profile-picture" alt="{{ friend.first_name + ' ' + friend.last_name }}">

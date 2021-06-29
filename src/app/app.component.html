@@ -3,7 +3,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand mt-2 mt-lg-0" style="text-decoration: none" routerLink="/timeline">
+    <a *ngIf="auth.isAuthenticated$ | async; else altNav" class="navbar-brand mt-2 mt-lg-0" style="text-decoration: none" routerLink="timeline" (click)="isMenuCollapsed = true">
       <h1 style="color: white">Hyves</h1>
     </a>
     <!-- Toggle button -->
@@ -17,46 +17,62 @@
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
-              <a class="nav-link nav-text" routerLink="/timeline">
+              <a class="nav-link nav-text" routerLink="timeline">
                 <fa-icon [icon]="faStream" class="nav-text"></fa-icon> Tijdlijn
               </a>
             </li>
             <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
-              <a class="nav-link nav-text" routerLink="/settings">
+              <a class="nav-link nav-text" routerLink="messages">
+                <fa-icon [icon]="faEnvelope" class="nav-text"></fa-icon> Berichten
+              </a>
+            </li>
+            <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
+              <a class="nav-link nav-text" routerLink="settings">
                 <fa-icon [icon]="faUserCog" class="nav-text"></fa-icon> Instellingen
               </a>
             </li>
             <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
-              <a class="nav-link nav-text" routerLink="/profile">
+              <a class="nav-link nav-text" routerLink="profile">
                 <fa-icon [icon]="faUserAlt" class="nav-text"></fa-icon> Profiel
               </a>
             </li>
             <li class="nav-item d-lg-none" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
-              <a type="button" class="nav-link nav-text" (click)="(auth.logout({ returnTo: document.location.origin })); isMenuCollapsed = true">
+              <a type="button" class="nav-link nav-text" (click)="logout()">
                 <fa-icon [icon]="faSignOutAlt" class="nav-text"></fa-icon> Uitloggen
               </a>
             </li>
           </ul>
         </div>
-        <!-- Avatar -->
+        <!-- Desktop only -->
         <div class="d-flex align-items-center nav-avatar">
+          <!-- Notifications -->
+          <div ngbDropdown display="dynamic" autoClose="outside" class="d-none d-lg-block" style="padding-right: 30px;">
+            <a ngbDropdownToggle class="d-flex align-items-center" style="color: white" role="button">
+              <fa-icon [icon]="faEnvelope" class="nav-text"></fa-icon>
+            </a>
+            <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end dropdown-menu-right">
+              <app-notifications></app-notifications>
+            </ul>
+          </div>
+          <!-- Avatar -->
           <div ngbDropdown display="dynamic" class="d-none d-lg-block">
             <a ngbDropdownToggle class="d-flex align-items-center" style="color: white" role="button">
-              <img src="https://ynnovate.it/wp-content/uploads/2015/07/default-avatar1.png" class="rounded-circle" height="30" alt="" loading="lazy"/>
+              <!-- TODO change link -->
+              <img src="https://i.redd.it/7b5ig5kuo59y.jpg" class="rounded-circle" height="30" width="30" alt="User" loading="lazy"/>
             </a>
             <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end dropdown-menu-right">
               <li>
-                <a ngbDropdownItem class="dropdown-item" style="text-align: left;  text-decoration: none" routerLink="/profile">
+                <a ngbDropdownItem class="dropdown-item" style="text-align: left;  text-decoration: none" routerLink="profile">
                   <fa-icon [icon]="faUserAlt" class="nav-text-alt"></fa-icon> Profiel
                 </a>
               </li>
               <li>
-                <a ngbDropdownItem class="dropdown-item" style="text-align: left; text-decoration: none;" routerLink="/settings">
+                <a ngbDropdownItem class="dropdown-item" style="text-align: left; text-decoration: none;" routerLink="settings">
                   <fa-icon [icon]="faUserCog" class="nav-text-alt"></fa-icon> Instellingen
                 </a>
               </li>
               <li>
-                <a ngbDropdownItem class="dropdown-item" style="text-align: left;  text-decoration: none;" (click)="(auth.logout({ returnTo: document.location.origin })); isMenuCollapsed = true">
+                <a ngbDropdownItem type="button" class="dropdown-item" style="text-align: left;  text-decoration: none;" (click)="logout()">
                   <fa-icon [icon]="faSignOutAlt" class="nav-text-alt"></fa-icon> Uitloggen
                 </a>
               </li>
@@ -81,10 +97,17 @@
   <div class="d-lg-none">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item" style="padding-left: 5px;" (click)="isMenuCollapsed = true">
-        <a class="nav-link nav-text" routerLink="/timeline">
+        <a class="nav-link nav-text" routerLink="timeline">
           <fa-icon [icon]="faSignInAlt" class="nav-text"></fa-icon> Inloggen
         </a>
       </li>
     </ul>
   </div>
+</ng-template>
+
+<!-- Alternative navigation template -->
+<ng-template #altNav>
+  <a class="navbar-brand mt-2 mt-lg-0" style="text-decoration: none" routerLink="home" (click)="isMenuCollapsed = true">
+    <h1 style="color: white">Hyves</h1>
+  </a>
 </ng-template>

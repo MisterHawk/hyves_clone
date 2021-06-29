@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { ApiService } from '../api.service';
 import { Profile } from '../profile';
-import { Title } from '@angular/platform-browser';
 import { faUserCog, faUserMinus, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { TitleService } from '../title.service';
 
 
 @Component({
@@ -24,21 +24,19 @@ export class ProfileComponent implements OnInit {
   faUserPlus = faUserPlus;
   faUserMinus = faUserMinus;
 
-  constructor(public auth: AuthService, private apiService: ApiService, private router: Router, private route: ActivatedRoute, private readonly titleService: Title) {
+  constructor(public auth: AuthService, private apiService: ApiService, private router: Router, private route: ActivatedRoute, private readonly titleService: TitleService) {
     this.index = this.resetIndex()
     this.id = "";
     this.profile = new Profile;
     this.friends = [];
     this.friend_status = Status.Default;
     this.route.paramMap.subscribe(params => {
-      this.id = params.get('id')!
+      this.id = params.get('id')!;
     })
-    // TODO: remove this
-    localStorage.setItem('id', '1')
    }
 
-  setIndex(id: number): void {
-    this.index = id
+  setIndex(index: number): void {
+    this.index = index;
   }
 
   resetIndex(): number {
@@ -82,6 +80,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.readUser(this.id).subscribe((profile: Profile) => {
       this.profile = profile;
+      this.titleService.setTitle(this.profile.first_name + " " + this.profile.last_name)
     })
 
     this.apiService.readFriends(this.id).subscribe((profiles: Profile[]) => {
@@ -98,8 +97,6 @@ export class ProfileComponent implements OnInit {
         });
       }
     })
-  
-    this.titleService.setTitle(this.profile.first_name + " " + this.profile.last_name)
   }
 }
 

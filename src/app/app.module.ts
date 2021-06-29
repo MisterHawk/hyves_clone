@@ -8,6 +8,7 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 // Angular
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -17,15 +18,24 @@ import { environment } from '../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SettingsComponent } from './settings/settings.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   { path: 'timeline', component: TimelineComponent, canActivate: [AuthGuard] },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileComponent },
-  { path: 'profile', redirectTo: 'profile/' + localStorage.getItem('id'), pathMatch: 'full' },
+  { 
+    path: 'profile', 
+    redirectTo: localStorage.getItem('id') !== null ? "profile/" + localStorage.getItem('id') : "home", // TODO: Make custom service for this line of code
+    pathMatch: 'full' 
+  },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: 'messages', component: NotificationsComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -36,6 +46,9 @@ const routes: Routes = [
     AccountComponent,
     SettingsComponent,
     RegisterComponent,
+    HomeComponent,
+    NotFoundComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,13 +86,13 @@ const routes: Routes = [
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
+      registrationStrategy: 'registerWhenStable:30000'
     }),
     FontAwesomeModule,
-    NgbModule,
+    NgbModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

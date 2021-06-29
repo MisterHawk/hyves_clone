@@ -1,0 +1,30 @@
+<ng-container *ngIf="notifications.length !== 0; else none">
+    <div *ngFor="let notification of notifications; let i = index" [attr.data-index]="i" ngbDropdownItem class="dropdown-item" style="text-align: left; text-decoration: none; display: flex; align-items: flex-start;">
+        <!-- Request -->
+        <a style="color: black; text-decoration: none;" type="button" routerLink="/profile/{{ notification.id }}">
+            <div style="align-items: flex-start;">
+                <img src="{{ notification.picture_url }}" class="rounded-circle" height="30" width="30" alt="" loading="lazy"/>
+                <span style="margin-left: 5px;">{{ notification.first_name + " " + notification.last_name }}</span>
+            </div>
+        </a>
+        <!-- Buttons -->
+        <div style="margin-left: auto">
+            <button class="notification-button" style="background-color: #059862; margin-left: 5px;" (click)="acceptFriend(i, notification.id)">
+                <fa-icon [icon]="faUserPlus" style="color:white;"></fa-icon>
+            </button>
+            <button class="notification-button" style="background-color: #eb4135; margin-left: 5px;" (click)="declineFriend(i, notification.id)">
+                <fa-icon [icon]="faUserMinus" style="color:white;"></fa-icon>
+            </button>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #none>
+    <div>
+        <p class="d-none d-lg-block">Geen berichten</p>
+        <h2 class="d-lg-none" style="margin-top: 10px;">Geen berichten</h2>
+        <a type="button" (click)="getNotifications()">
+            <fa-icon [icon]="faSyncAlt" style="color:black;"></fa-icon> Refresh
+        </a>
+    </div>
+</ng-template>

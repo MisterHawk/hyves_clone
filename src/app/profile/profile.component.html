@@ -54,13 +54,11 @@
                             <div class="info-left">
                                 <p>Naam:</p>
                                 <p>Achternaam:</p>
-                                <p>Geboortedatum:</p>
                                 <p>Geslacht:</p>
                             </div>
                             <div class="info-right">
                                 <p>{{ profile.first_name }}</p>
                                 <p>{{ profile.last_name }}</p>
-                                <p>{{ profile.birth_date }}</p>
                                 <p>{{ profile.gender }}</p>
                             </div>
                         </div>
@@ -79,6 +77,9 @@
                     </div>
                 </div>
                 <div class="timeline-container">
+                    <ng-container *ngIf="canMakePost()">
+                        <app-make-post></app-make-post>
+                    </ng-container>
                     <app-posts></app-posts>
                 </div>
             </div>
@@ -92,13 +93,11 @@
                             <div class="info-left">
                                 <p>Naam:</p>
                                 <p>Achternaam:</p>
-                                <p>Geboortedatum:</p>
                                 <p>Geslacht:</p>
                             </div>
                             <div class="info-right">
                                 <p>{{ profile.first_name }}</p>
                                 <p>{{ profile.last_name }}</p>
-                                <p>{{ profile.birth_date }}</p>
                                 <p>{{ profile.gender }}</p>
                             </div>
                         </div>
@@ -119,6 +118,9 @@
             </div>
             <!-- Timeline, id(2) -->
             <div class="container-fluid" *ngIf="index === 2">
+                <ng-container *ngIf="canMakePost()">
+                    <app-make-post></app-make-post>
+                </ng-container>
                 <app-posts></app-posts>
             </div>
             <!-- Media, id(3) -->

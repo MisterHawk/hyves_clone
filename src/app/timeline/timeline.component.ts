@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { ApiService } from '../api.service';
 import { Post } from '../post';
 import { Profile } from '../profile';
@@ -10,11 +11,24 @@ import { Profile } from '../profile';
 })
 export class TimelineComponent implements OnInit {
   posts: Post[];
-  constructor(private api: ApiService) { 
+  constructor(private api: ApiService, private auth: AuthService) { 
     this.posts = [];
   }
 
   ngOnInit(): void {
+    var email: string = "";
+    var array: any[];
+    this.auth.user$.subscribe(user => {
+      email = user?.email!
+      this.api.getIdByEmail(email).subscribe(
+        (response) => {
+          array = response;
+          localStorage.setItem('id', array[0]['id'])
+        },
+        (error) => console.log(error)
+      )
+    })
+    
     this.api.getPostsTimeline(localStorage.getItem('id')!).subscribe((post: Post[]) => {
         for (let i in post) {
           this.api.readUser(post[i]['user_id']).subscribe((profile: Profile) => {
@@ -30,6 +44,7 @@ export class TimelineComponent implements OnInit {
           })
         }
     })
+    
   }
 
 }

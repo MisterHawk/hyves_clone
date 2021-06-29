@@ -1,50 +1,27 @@
 <p>Wij willen je graag beter leren kennen!</p>
 <p>Vul hier extra gegevens in</p>
-
 <div class="container">
-  <form [formGroup]="registerForm">
-    <div class="col">
-      <label for="firstname">Voornaam: </label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="firstname"
-        required
-        placeholder="Peter"
-      />
-
-      <label for="lastname">Achternaam: </label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="lastname"
-        required
-        placeholder="Pan"
-      />
-      <br />
-      <label for="birthday">Geboortedatum: </label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="birthday"
-        required
-      />
-      <br />
-      <label for="bio">Korte biografie: </label>
-      <input
-        class="form-control"
-        type="textarea"
-        maxlength="25"
-        formControlName="bio"
-        placeholder="vul hier een korte bio in."
-        required
-        aria-describedby="bioHelp"
-      />
-      <small id="bioHelp" class="form-text text-muted">
-        Je biografie mag uit maximaal 25 tekens bestaan.
-      </small>
-      <br />
-      <input type="submit" value="Opslaan" />
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <input type="file" (change)="uploadFile($event)">
     </div>
+    <div class="form-group input-group-lg">
+      <input class="form-control" placeholder="email" formControlName="email" hidden>
+  </div>
+  <div class="form-group input-group-lg">
+    <input class="form-control" placeholder="First name" formControlName="first_name">
+</div>
+<div class="form-group input-group-lg">
+  <input class="form-control" placeholder="Last name" formControlName="last_name">
+</div>
+<div class="form-group input-group-lg">
+  <input class="form-control" placeholder="User bio" formControlName="bio">
+</div>
+<div class="form-group input-group-lg">
+  <input class="form-control" placeholder="Gender" formControlName="gender">
+</div>
+  <div class="form-group">
+      <button class="btn btn-block btn-lg">Upload</button>
+  </div>
   </form>
 </div>

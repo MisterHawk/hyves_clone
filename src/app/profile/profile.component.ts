@@ -42,6 +42,10 @@ export class ProfileComponent implements OnInit {
     return window.innerWidth >= 1200 ? 0 : 2;
   }
 
+  canMakePost(): boolean {
+    return localStorage.getItem('id') === this.id;
+  }
+
   addFriend(): void {
     // TODO: send request to apiservice
     var postdata: FormData = new FormData();
@@ -103,7 +107,6 @@ export class ProfileComponent implements OnInit {
           picture_url: profiles[i]['picture_url'],
           user_bio: profiles[i]['user_bio'],
           gender: profiles[i]['gender'],
-          birth_date: profiles[i]['birth_date'],
           date_created: profiles[i]['date_created']
         });
       }

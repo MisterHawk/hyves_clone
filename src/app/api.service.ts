@@ -48,4 +48,16 @@ export class ApiService {
     return this.httpClient.post<Post>(`${this.PHP_API_SERVER}/backend/php/API/posts/make_post.php`, data);
   }
 
+  checkUserEmail(email: string): Observable<string> {
+    return this.httpClient.get<string>(`${this.PHP_API_SERVER}/backend/php/API/profile/check_profile.php/?email=${email}`);
+  }
+
+  createUser(data: FormData): Observable<string> {
+    return this.httpClient.post<string>(`${this.PHP_API_SERVER}/backend/php/API/profile/create_profile.php`, data);
+  }
+
+  getIdByEmail(email: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.PHP_API_SERVER}/backend/php/API/profile/get_id_by_email.php/?email=${email}`);
+  }
+
 }

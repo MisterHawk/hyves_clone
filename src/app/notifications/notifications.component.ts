@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { faUserPlus, faUserMinus, faTimesCircle, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../api.service';
 import { Profile } from '../profile';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-notifications',
@@ -47,7 +48,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   getNotifications() {
-    this.api.readRequests('1').subscribe((profiles: Profile[]) => {
+    this.api.readRequests(localStorage.getItem('id')!).subscribe((profiles: Profile[]) => {
       for (let i in profiles) {
         this.notifications.push({
           id: profiles[i]['id'],
@@ -63,7 +64,7 @@ export class NotificationsComponent implements OnInit {
     this.notifications.splice(index, 1);
   }
 
-  constructor(private router: Router, private readonly titleService: TitleService, private api: ApiService) {
+  constructor(private router: Router, private readonly titleService: TitleService, private api: ApiService, private auth: AuthService) {
     if (this.router.url === '/messages') {
       this.titleService.setTitle("Berichten")
     }
@@ -71,7 +72,8 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    this.getNotifications();
+    this.auth.isAuthenticated$.subscribe(x => {
+      if (x) this.getNotifications();
+    })
   }
-
 }

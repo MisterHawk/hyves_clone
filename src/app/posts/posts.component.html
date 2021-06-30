@@ -1,29 +1,39 @@
 <div class="d-grid gap-3">
-    <div *ngFor="let post of posts" class="card w-50 mx-auto">  
-        <div class="media">
-            <!-- Name of poster w/ image (disabled for now) -->
-            <div class="card-header">
-                <div class="paragraphs">
-                    <div class="row">
-                        <div class="span4">
-                            <img class="mr-3" style="float:left" height="75px" src="{{post.picture_url}}">
-                            <div class="content-heading"><p class="mt-0"><br><a href="/profile/{{post.user_id}}" class="card-link">{{post.first_name}}</a></p></div>
-                            <p class="text-left text-muted">{{post.date}}</p>
-                            <p style="clear:both"></p>
-                        </div>
-                    </div>
-                </div>
+  <div *ngFor="let post of posts" class="card w-50 mx-auto">
+    <div class="media">
+      <!-- Name of poster w/ image (disabled for now) -->
+      <div class="card-header">
+        <div class="paragraphs">
+          <div class="row">
+            <div class="span4">
+              <img
+                class="mr-3"
+                style="float: left"
+                height="75px"
+                src="{{ post.picture_url }}"
+              />
+              <div class="content-heading">
+                <p class="mt-0">
+                  <br /><a
+                    href="/profile/{{ post.user_id }}"
+                    class="card-link"
+                    >{{ post.first_name }}</a
+                  >
+                </p>
+              </div>
+              <p class="text-left text-muted">{{ post.date }}</p>
+              <p style="clear: both"></p>
             </div>
-            <!-- Post content w/ optional image -->
-            <div class="card-body card-text">
-                <p class="text-left text-primary">{{post.content}}</p>
-                <div *ngIf="post.image_url && post.image_url?.length !== 0">
-                    <img src="{{post.image_url}}" class="card-img-top">
-                </div>
-            </div>
-            <!-- Like/Dislike/Comment button -->
+          </div>
         </div>
+      </div>
+      <!-- Post content w/ optional image -->
+      <div class="card-body card-text">
+        <p class="text-left text-primary">{{ post.content }}</p>
+        <div *ngIf="post.image_url && post.image_url?.length !== 0">
+          <img src="{{ post.image_url }}" class="card-img-top" />
+        </div>
+      </div>
     </div>
-</div>  
-
-
+  </div>
+</div>

@@ -1,3 +1,8 @@
 button {
   color: rbg(247, 137, 52);
 }
+.btn {
+  background-color: #f78934;
+  color: white;
+  font-weight: bold;
+}

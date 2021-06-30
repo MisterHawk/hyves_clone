@@ -1,4 +1,3 @@
-<p>Pas hier je instellingen aan</p>
 <!--DE PLACEHOLDERS MOETEN VERVANGEN WORDEN DOOR DE INFO UIT DE DB-->
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="submitForm()">
@@ -16,47 +15,56 @@
         hidden
       />
     </div>
-    <label>Voornaam</label>
+    <div class="row">
+      <div class="col">
+        <label>Voornaam</label>
 
-    <div class="form-group input-group-lg">
-      <input
-        class="form-control"
-        placeholder="Peter"
-        formControlName="first_name"
-      />
+        <div class="form-group input-group-lg">
+          <input
+            class="form-control"
+            placeholder="Peter"
+            formControlName="first_name"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <label>Achternaam</label>
+
+        <div class="form-group input-group-lg">
+          <input
+            class="form-control"
+            placeholder="Pan"
+            formControlName="last_name"
+          />
+        </div>
+      </div>
     </div>
     <br />
-    <label>Achternaam</label>
+    <div class="row">
+      <div class="col">
+        <label>Geslacht</label>
+        <div class="form-group input-group-lg">
+          <input
+            class="form-control"
+            placeholder="Man/Vrouw/Anders"
+            formControlName="gender"
+            maxlength="12"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <label>Biografie</label>
 
-    <div class="form-group input-group-lg">
-      <input
-        class="form-control"
-        placeholder="Pan"
-        formControlName="last_name"
-      />
-    </div>
-    <br />
-    <label>Geslacht</label>
-    <div class="form-group input-group-lg">
-      <input
-        class="form-control"
-        placeholder="Man/Vrouw/Anders"
-        formControlName="gender"
-        maxlength="12"
-      />
-    </div>
-    <br />
-
-    <label>Biografie</label>
-
-    <div class="form-group input-group-lg">
-      <input
-        class="form-control"
-        placeholder="Een korte biografie"
-        formControlName="bio"
-        maxlength="25"
-      />
-      <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
+        <div class="form-group input-group-lg">
+          <input
+            class="form-control"
+            placeholder="Een korte biografie"
+            formControlName="bio"
+            maxlength="25"
+          />
+          <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
+        </div>
+      </div>
       <br />
       <br />
     </div>

@@ -19,11 +19,15 @@ export class NotificationsComponent implements OnInit {
 
   notifications: any[];
 
-  declineFriend(index: number, id: string): void {
-    // TODO: decline request
+  preparePostMessage(id: string): FormData {
     var postdata: FormData = new FormData();
-    postdata.append("id", '1');
+    postdata.append("id", localStorage.getItem('id')!)
     postdata.append("id2", id);
+    return postdata;
+  }
+
+  declineFriend(index: number, id: string): void {
+    var postdata: FormData = this.preparePostMessage(id);
     postdata.append("reply", '0');
     this.api.requestReply(postdata).subscribe(
         (response) => console.log(response),
@@ -33,10 +37,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   acceptFriend(index: number, id: string): void {
-    // TODO: accept request
-    var postdata: FormData = new FormData();
-    postdata.append("id", '1');
-    postdata.append("id2", id);
+    var postdata: FormData = this.preparePostMessage(id);
     postdata.append("reply", '1');
     this.api.requestReply(postdata).subscribe(
         (response) => console.log(response),
@@ -46,7 +47,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   getNotifications() {
-    // TODO: get request from api
     this.api.readRequests('1').subscribe((profiles: Profile[]) => {
       for (let i in profiles) {
         this.notifications.push({
@@ -56,7 +56,6 @@ export class NotificationsComponent implements OnInit {
           picture_url: profiles[i]['picture_url']
         });
       }
-      console.log(this.notifications);
     })
   }
 

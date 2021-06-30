@@ -24,9 +24,9 @@ export class AppComponent {
     public auth: AuthService
   ) {}
 
-  logout(): void {
-    this.auth.logout({ returnTo: document.location.origin }); 
+  logout(): void { 
     this.isMenuCollapsed = true; 
     localStorage.clear();
+    this.auth.logout({ returnTo: document.location.origin });
   }
 }

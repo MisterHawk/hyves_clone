@@ -46,34 +46,31 @@ export class ProfileComponent implements OnInit {
     return localStorage.getItem('id') === this.id;
   }
 
-  addFriend(): void {
-    // TODO: send request to apiservice
+  sendPostMessage(): void {
     var postdata: FormData = new FormData();
-    postdata.append("id", '1');
+    postdata.append("id", localStorage.getItem('id')!)
     postdata.append("id2", this.id);
     this.apiService.addFriend(postdata).subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
+      (response) => console.log(response),
+      (error) => console.log(error)
     )
+  }
+
+  addFriend(): void {
+    this.sendPostMessage();
     this.friend_status = Status.Added;
-    this.logFriendStatus();
   }
 
   removeFriend(): void {
-    // TODO: send  request to apiservice
-    var postdata: FormData = new FormData();
-    postdata.append("id", '1');
-    postdata.append("id2", this.id);
-    this.apiService.deleteFriend(postdata).subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-    )
+    this.sendPostMessage();
     this.friend_status = Status.Removed;
-    this.logFriendStatus();
+    this.clearFriend(localStorage.getItem('id')!);
   }
 
-  logFriendStatus(): void {
-    console.log("User(" + this.id + ") " + Status[this.friend_status]);
+  clearFriend(id: string) {
+    if (this.checkFriends()) {
+      this.friends.splice(this.friends.findIndex(x => x.id === id), 1);
+    }
   }
 
   checkFriends(): boolean {

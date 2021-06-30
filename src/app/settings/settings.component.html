@@ -1,49 +1,67 @@
 <p>Pas hier je instellingen aan</p>
-
+<!--DE PLACEHOLDERS MOETEN VERVANGEN WORDEN DOOR DE INFO UIT DE DB-->
 <div class="container">
-  <form [formGroup]="settingsForm">
-    <div class="col">
-      <label for="firstname">Voornaam: </label>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <br /><br />
+    <p>Profielfoto</p>
+    <div class="form-group">
+      <input type="file" (change)="uploadFile($event)" />
+    </div>
+    <br />
+    <div class="form-group input-group-lg">
       <input
         class="form-control"
-        type="text"
-        formControlName="firstname"
-        required
-        placeholder="Peter"
+        placeholder="email"
+        formControlName="email"
+        hidden
       />
+    </div>
+    <label>Voornaam</label>
 
-      <label for="lastname">Achternaam: </label>
+    <div class="form-group input-group-lg">
       <input
         class="form-control"
-        type="text"
-        formControlName="lastname"
-        required
+        placeholder="Peter"
+        formControlName="first_name"
+      />
+    </div>
+    <br />
+    <label>Achternaam</label>
+
+    <div class="form-group input-group-lg">
+      <input
+        class="form-control"
         placeholder="Pan"
+        formControlName="last_name"
       />
-      <br />
-      <label for="birthday">Geboortedatum: </label>
+    </div>
+    <br />
+    <label>Geslacht</label>
+    <div class="form-group input-group-lg">
       <input
         class="form-control"
-        type="date"
-        formControlName="birthday"
-        required
+        placeholder="Man/Vrouw/Anders"
+        formControlName="gender"
       />
-      <br />
-      <label for="bio">Korte biografie: </label>
+    </div>
+    <br />
+
+    <label>Biografie</label>
+
+    <div class="form-group input-group-lg">
       <input
         class="form-control"
-        type="textarea"
-        maxlength="25"
+        placeholder="Een korte biografie"
         formControlName="bio"
-        placeholder="vul hier een korte bio in."
-        required
-        aria-describedby="bioHelp"
+        maxlength="25"
       />
-      <small id="bioHelp" class="form-text text-muted">
-        Je biografie mag uit maximaal 25 tekens bestaan.
-      </small>
+      <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
       <br />
-      <input type="submit" value="Opslaan" />
+      <br />
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-lg">Opslaan</button>
     </div>
   </form>
 </div>

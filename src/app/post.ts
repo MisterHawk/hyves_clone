@@ -5,5 +5,6 @@ export class Post {
     content: string = '';
     date: Date = new Date();
     first_name: string = '';
+    last_name: string = '';
     picture_url: string = '';
 }

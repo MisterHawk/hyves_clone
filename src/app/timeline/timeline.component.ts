@@ -39,6 +39,7 @@ export class TimelineComponent implements OnInit {
               content: post[i]['content'],
               date: post[i]['date'],
               first_name: profile['first_name'],
+              last_name: profile['last_name'],
               picture_url: profile['picture_url']
             });
           })

@@ -2,35 +2,55 @@
 <div class="d-grid gap-3">
   <div *ngFor="let post of posts" class="card w-50 mx-auto">
     <div class="media">
-      <!-- Name of poster w/ image (disabled for now) -->
       <div class="card-header">
         <div class="paragraphs">
           <div class="row">
             <div class="span4">
-              <img
-                class="mr-3"
-                style="float: left"
-                height="75px"
-                src="{{ post.picture_url }}"
-              />
+              <div class="col">
+                <img
+                  class="mr-3"
+                  style="float: left; border-radius: 20%"
+                  height="75px"
+                  width="75px"
+                  src="{{ post.picture_url }}"
+                />
+              </div>
+
               <div class="content-heading">
-                <p class="mt-0">
+                <p
+                  class="mt-0"
+                  style="
+                    float: left;
+                    padding-left: 20px;
+                    font-weight: bold;
+                    margin: 0px;
+                    font-size: larger;
+                    align-content: center;
+                  "
+                >
                   <br /><a
                     href="/profile/{{ post.user_id }}"
                     class="card-link"
                     >{{ post.first_name }}</a
                   >
                 </p>
+                <p
+                  style="
+                    float: right;
+                    padding: 0px;
+                    margin: 0px;
+                    font-weight: normal;
+                  "
+                >
+                  {{ post.date.toLocaleString().slice(0, 10) }}
+                </p>
               </div>
-              <p class="text-left text-muted">{{ post.date }}</p>
-              <p style="clear: both"></p>
             </div>
           </div>
         </div>
       </div>
-      <!-- Post content w/ optional image -->
       <div class="card-body card-text">
-        <p class="text-left text-primary">{{ post.content }}</p>
+        <p class="text-left">{{ post.content }}</p>
         <div *ngIf="post.image_url && post.image_url?.length !== 0">
           <img src="{{ post.image_url }}" class="card-img-top" />
         </div>

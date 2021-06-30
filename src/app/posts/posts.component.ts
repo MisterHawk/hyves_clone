@@ -16,7 +16,18 @@ export class PostsComponent implements OnInit {
   profile: Profile;
   id: string;
   constructor(private api: ApiService, private route: ActivatedRoute) {
-    this.posts = [];
+    this.posts = [
+      { 
+        post_id: '0', user_id: '0', image_url:  '',
+        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio molestias atque, iure tempora aspernatur laudantium.' , date: new Date, first_name: "Hans", picture_url: 'https://www.dutchcowboys.nl/uploads/images/jan-paparazzi-hyves.jpeg'
+    }, { 
+      post_id: '0', user_id: '0', image_url:  'https://www.eenofandereblog.nl/wp-content/uploads/Blogwinter-willekeurige-voorwerpen-5.jpg',
+      content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio molestias atque, iure tempora aspernatur laudantium.' , date: new Date, first_name: "Hans", picture_url: 'https://www.dutchcowboys.nl/uploads/images/jan-paparazzi-hyves.jpeg'
+  }, { 
+    post_id: '0', user_id: '0', image_url:  '',
+    content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio molestias atque, iure tempora aspernatur laudantium.' , date: new Date, first_name: "Hans", picture_url: 'https://www.dutchcowboys.nl/uploads/images/jan-paparazzi-hyves.jpeg'
+}
+    ];
     this.profile = new Profile;
     this.id = '';
   }

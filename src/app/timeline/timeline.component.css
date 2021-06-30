@@ -1,3 +1,7 @@
 p {
   font-family: Lato;
 }
+a {
+  text-decoration: none;
+  color: #f78934dc;
+}

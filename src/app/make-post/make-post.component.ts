@@ -34,6 +34,7 @@ export class MakePostComponent implements OnInit {
       (response) => console.log(response),
       (error) => console.log(error)
     )
+    window.location.reload();
   }
 
   ngOnInit(): void {

@@ -46,23 +46,26 @@ export class ProfileComponent implements OnInit {
     return localStorage.getItem('id') === this.id;
   }
 
-  sendPostMessage(): void {
+  sendPostMessage(): FormData {
     var postdata: FormData = new FormData();
     postdata.append("id", localStorage.getItem('id')!)
     postdata.append("id2", this.id);
-    this.apiService.addFriend(postdata).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
-    )
+    return postdata;
   }
 
   addFriend(): void {
-    this.sendPostMessage();
+    this.apiService.addFriend(this.sendPostMessage()).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
     this.friend_status = Status.Added;
   }
 
   removeFriend(): void {
-    this.sendPostMessage();
+    this.apiService.deleteFriend(this.sendPostMessage()).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
     this.friend_status = Status.Removed;
     this.clearFriend(localStorage.getItem('id')!);
   }

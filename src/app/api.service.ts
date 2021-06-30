@@ -60,4 +60,8 @@ export class ApiService {
     return this.httpClient.get<any>(`${this.PHP_API_SERVER}/backend/php/API/profile/get_id_by_email.php/?email=${email}`);
   }
 
+  updateUser(data: FormData): Observable<string> {
+    return this.httpClient.post<string>(`${this.PHP_API_SERVER}/backend/php/API/profile/update_profile.php`, data);
+  }
+
 }

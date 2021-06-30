@@ -7,22 +7,13 @@
       <input type="file" (change)="uploadFile($event)" />
     </div>
     <br />
-    <div class="form-group input-group-lg">
-      <input
-        class="form-control"
-        placeholder="email"
-        formControlName="email"
-        hidden
-      />
-    </div>
     <div class="row">
       <div class="col">
         <label>Voornaam</label>
-
         <div class="form-group input-group-lg">
           <input
             class="form-control"
-            placeholder="Peter"
+            placeholder="{{ profile.first_name }}"
             formControlName="first_name"
           />
         </div>
@@ -33,7 +24,7 @@
         <div class="form-group input-group-lg">
           <input
             class="form-control"
-            placeholder="Pan"
+            placeholder="{{ profile.last_name }}"
             formControlName="last_name"
           />
         </div>
@@ -46,7 +37,7 @@
         <div class="form-group input-group-lg">
           <input
             class="form-control"
-            placeholder="Man/Vrouw/Anders"
+            placeholder="{{ profile.gender }}"
             formControlName="gender"
             maxlength="12"
           />
@@ -58,7 +49,7 @@
         <div class="form-group input-group-lg">
           <input
             class="form-control"
-            placeholder="Een korte biografie"
+            placeholder="{{ profile.user_bio }}"
             formControlName="bio"
             maxlength="25"
           />

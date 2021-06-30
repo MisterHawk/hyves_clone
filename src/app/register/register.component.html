@@ -2,4 +2,76 @@
 
 <p>Wij willen je graag beter leren kennen!</p>
 <p>Vul hier jouw informatie in</p>
-<app-settings></app-settings>
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+      <br /><br />
+      <p>Profielfoto</p>
+      <div class="form-group">
+        <input type="file" (change)="uploadFile($event)" />
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+          <label>Voornaam</label>
+          <div class="form-group input-group-lg">
+            <input
+              class="form-control"
+              placeholder="Voornaam"
+              formControlName="first_name"
+            />
+          </div>
+        </div>
+            <div class="form-group input-group-lg">
+              <input
+                class="form-control"
+                formControlName="email"
+                hidden
+              />
+            </div>
+        <div class="col">
+          <label>Achternaam</label>
+          <div class="form-group input-group-lg">
+            <input
+              class="form-control"
+              placeholder="Achternaam"
+              formControlName="last_name"
+            />
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+          <label>Geslacht</label>
+          <div class="form-group input-group-lg">
+            <input
+              class="form-control"
+              placeholder="Geslacht"
+              formControlName="gender"
+              maxlength="12"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <label>Biografie</label>
+  
+          <div class="form-group input-group-lg">
+            <input
+              class="form-control"
+              placeholder="Biografie"
+              formControlName="bio"
+              maxlength="25"
+            />
+            <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
+          </div>
+        </div>
+        <br />
+        <br />
+      </div>
+  
+      <div class="form-group">
+        <button class="btn btn-lg">Opslaan</button>
+      </div>
+    </form>
+  </div>
+  

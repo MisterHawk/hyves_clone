@@ -1,17 +1,36 @@
+<br /><br />
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="submitForm()">
-    <div class="form-group">
-      <input type="file" (change)="uploadFile($event)" />
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <br />
+        <div class="form-group input-group-lg">
+          <input
+            class="form-control"
+            placeholder="Wat heb je vandaag gedaan?"
+            formControlName="content"
+          />
+        </div>
+        <br />
+        <div class="row">
+          <div class="col" style="align-content: center; flex-wrap: wrap">
+            <div class="form-group">
+              <input
+                type="file"
+                accept="image/*"
+                (change)="uploadFile($event)"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group" style="float: right">
+              <button class="btn btn-lg">Post</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="form-group input-group-lg">
-      <input
-        class="form-control"
-        placeholder="content"
-        formControlName="content"
-      />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-lg">Upload</button>
-    </div>
-  </form>
+    <div class="col"></div>
+  </div>
 </div>

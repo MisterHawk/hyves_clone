@@ -1,36 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col"></div>
     <div class="col">
       <form [formGroup]="form" (ngSubmit)="submitForm()">
-        <br />
         <div class="form-group input-group-lg">
-          <input
-            class="form-control"
-            placeholder="Wat heb je vandaag gedaan?"
-            formControlName="content"
-          />
+          <textarea class="form-control" style="resize: none; height: 100px;" placeholder="Wat heb je vandaag gedaan?" formControlName="content"></textarea>
         </div>
-        <br />
-        <div class="row">
+        <div class="row" style="margin-top: 10px;">
           <div class="col" style="align-content: center; flex-wrap: wrap">
-            <div class="form-group">
-              <input
-                type="file"
-                accept="image/*"
-                (change)="uploadFile($event)"
-              />
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group" style="float: right">
-              <button class="btn btn-lg">Post</button>
+            <div class="form-group" style="display: flex; align-items: center;">
+              <input type="file" accept="image/*" (change)="uploadFile($event)"/>
+              <button class="btn btn-lg" style="margin-left: auto">Post</button>
             </div>
           </div>
         </div>
       </form>
     </div>
-    <div class="col"></div>
   </div>
 </div>
-<br /><br />

@@ -78,9 +78,14 @@
                 </div>
                 <div class="timeline-container">
                     <ng-container *ngIf="canMakePost()">
-                        <app-make-post></app-make-post>
+                        <div style="width: 80%; margin: auto">
+                            <app-make-post></app-make-post>
+                            <hr style="margin-top: 20px;">
+                        </div>
                     </ng-container>
-                    <app-posts></app-posts>
+                    <div style="width: 80%; margin: auto">
+                        <app-posts></app-posts>
+                    </div>
                 </div>
             </div>
             <!-- Info, id(1) -->
@@ -119,7 +124,10 @@
             <!-- Timeline, id(2) -->
             <div class="container-fluid" *ngIf="index === 2">
                 <ng-container *ngIf="canMakePost()">
-                    <app-make-post></app-make-post>
+                    <div style="margin-top: 10px;">
+                        <app-make-post></app-make-post>
+                        <hr style="margin-top: 20px;">
+                    </div>
                 </ng-container>
                 <app-posts></app-posts>
             </div>

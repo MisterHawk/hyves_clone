@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
 import { ApiService } from '../api.service';
 import { Profile } from '../profile';
+import { TitleService } from '../title.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +15,7 @@ export class SettingsComponent implements OnInit {
 
   form: FormGroup;
   profile: Profile;
-  constructor(private auth: AuthService, private api: ApiService, private router: Router, private fb: FormBuilder) {
+  constructor(private auth: AuthService, private api: ApiService, private router: Router, private fb: FormBuilder, private titleService: TitleService) {
     this.form = this.fb.group({
       first_name: [''],
       last_name: [''],
@@ -28,6 +29,7 @@ export class SettingsComponent implements OnInit {
     this.api.readUser(localStorage.getItem('id')!).subscribe((profile: Profile) => {
       this.profile = profile;
     })
+    this.titleService.setTitle("Instellingen")
   }
 
 uploadFile(event: Event){
@@ -38,8 +40,7 @@ uploadFile(event: Event){
   this.form.get('image')!.updateValueAndValidity()
 }
 
-
-submitForm(){
+submitForm() {
   var formData: any = new FormData();
   formData.append("id", localStorage.getItem('id'));
   formData.append("first_name", this.form.get('first_name')!.value);
@@ -51,5 +52,6 @@ submitForm(){
     (response) => console.log(response),
     (error) => console.log(error)
   )
-}
+  this.router.navigate(['/timeline']);
+  }
 }

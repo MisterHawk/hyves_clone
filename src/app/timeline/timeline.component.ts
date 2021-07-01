@@ -16,18 +16,20 @@ export class TimelineComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var email: string = "";
-    var array: any[];
-    this.auth.user$.subscribe(user => {
-      email = user?.email!
-      this.api.getIdByEmail(email).subscribe(
-        (response) => {
-          array = response;
-          localStorage.setItem('id', array[0]['id'])
-        },
-        (error) => console.log(error)
-      )
-    })
+    if (localStorage.getItem('id') === null) {
+      var email: string = "";
+      var array: any[];
+      this.auth.user$.subscribe(user => {
+        email = user?.email!
+        this.api.getIdByEmail(email).subscribe(
+          (response) => {
+            array = response;
+            localStorage.setItem('id', array[0]['id'])
+          },
+          (error) => console.log(error)
+        )
+      })
+    }
     
     this.api.getPostsTimeline(localStorage.getItem('id')!).subscribe((post: Post[]) => {
         for (let i in post) {

@@ -2,76 +2,50 @@
 
 <p>Wij willen je graag beter leren kennen!</p>
 <p>Vul hier jouw informatie in</p>
-<div class="container">
-    <form [formGroup]="form" (ngSubmit)="submitForm()">
-      <br /><br />
-      <p>Profielfoto</p>
-      <div class="form-group">
-        <input type="file" (change)="uploadFile($event)" />
-      </div>
-      <br />
-      <div class="row">
-        <div class="col">
-          <label>Voornaam</label>
-          <div class="form-group input-group-lg">
-            <input
-              class="form-control"
-              placeholder="Voornaam"
-              formControlName="first_name"
-            />
-          </div>
-        </div>
-            <div class="form-group input-group-lg">
-              <input
-                class="form-control"
-                formControlName="email"
-                hidden
-              />
-            </div>
-        <div class="col">
-          <label>Achternaam</label>
-          <div class="form-group input-group-lg">
-            <input
-              class="form-control"
-              placeholder="Achternaam"
-              formControlName="last_name"
-            />
-          </div>
+<div class="container" style="margin-top: 10px">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <p>Profielfoto</p>
+    <div class="form-group">
+      <input type="file" (change)="uploadFile($event)" />
+    </div>
+    <div class="form-group input-group-lg">
+      <input class="form-control" formControlName="email" hidden/>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+      <div class="col">
+        <label>Voornaam</label>
+        <div class="form-group input-group-lg">
+          <input class="form-control" placeholder="Voornaam" formControlName="first_name">
         </div>
       </div>
-      <br />
-      <div class="row">
-        <div class="col">
-          <label>Geslacht</label>
-          <div class="form-group input-group-lg">
-            <input
-              class="form-control"
-              placeholder="Geslacht"
-              formControlName="gender"
-              maxlength="12"
-            />
-          </div>
+      <div class="col">
+        <label>Achternaam</label>
+        <div class="form-group input-group-lg">
+          <input class="form-control" placeholder="Achternaam" formControlName="last_name"/>
         </div>
-        <div class="col">
-          <label>Biografie</label>
-  
-          <div class="form-group input-group-lg">
-            <input
-              class="form-control"
-              placeholder="Biografie"
-              formControlName="bio"
-              maxlength="25"
-            />
-            <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
-          </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+      <div class="col">
+        <label>Geslacht</label>
+        <div class="form-group input-group-lg">
+          <select class="form-control" formControlName="gender">
+            <option value="Man">Man</option>
+            <option value="Vrouw">Vrouw</option>
+            <option value="Onbekend">Onbekend</option>
+          </select>
         </div>
-        <br />
-        <br />
       </div>
-  
-      <div class="form-group">
-        <button class="btn btn-lg">Opslaan</button>
+      <div class="col" style="margin: auto">
+        <label>Biografie</label>
+        <div class="form-group input-group-lg">
+          <input class="form-control" placeholder="Biografie" formControlName="bio" maxlength="25">
+          <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
+        </div>
       </div>
-    </form>
-  </div>
-  
+    </div>
+    <div class="form-group" style="margin-top: 20px">
+      <button class="btn btn-lg">Opslaan</button>
+    </div>
+  </form>
+</div>

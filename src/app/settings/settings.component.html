@@ -1,66 +1,43 @@
-<!--DE PLACEHOLDERS MOETEN VERVANGEN WORDEN DOOR DE INFO UIT DE DB-->
-<div class="container">
+<div class="container" style="margin-top: 10px">
   <form [formGroup]="form" (ngSubmit)="submitForm()">
-    <br /><br />
     <p>Profielfoto</p>
     <div class="form-group">
       <input type="file" (change)="uploadFile($event)" />
     </div>
-    <br />
-    <div class="row">
+    <div class="row" style="margin-top: 20px;">
       <div class="col">
         <label>Voornaam</label>
         <div class="form-group input-group-lg">
-          <input
-            class="form-control"
-            placeholder="{{ profile.first_name }}"
-            formControlName="first_name"
-          />
+          <input class="form-control" placeholder="{{ profile.first_name }}" formControlName="first_name">
         </div>
       </div>
       <div class="col">
         <label>Achternaam</label>
-
         <div class="form-group input-group-lg">
-          <input
-            class="form-control"
-            placeholder="{{ profile.last_name }}"
-            formControlName="last_name"
-          />
+          <input class="form-control" placeholder="{{ profile.last_name }}" formControlName="last_name"/>
         </div>
       </div>
     </div>
-    <br />
-    <div class="row">
+    <div class="row" style="margin-top: 20px;">
       <div class="col">
         <label>Geslacht</label>
         <div class="form-group input-group-lg">
-          <input
-            class="form-control"
-            placeholder="{{ profile.gender }}"
-            formControlName="gender"
-            maxlength="12"
-          />
+          <select class="form-control" formControlName="gender">
+            <option [selected]="profile.gender === 'Man'" value="Man">Man</option>
+            <option [selected]="profile.gender === 'Vrouw'" value="Vrouw">Vrouw</option>
+            <option [selected]="profile.gender === 'Onbekend'" value="Onbekend">Onbekend</option>
+          </select>
         </div>
       </div>
-      <div class="col">
+      <div class="col" style="margin: auto">
         <label>Biografie</label>
-
         <div class="form-group input-group-lg">
-          <input
-            class="form-control"
-            placeholder="{{ profile.user_bio }}"
-            formControlName="bio"
-            maxlength="25"
-          />
+          <input class="form-control" placeholder="{{ profile.user_bio }}" formControlName="bio" maxlength="25">
           <small>Je biografie mag uit maximaal 25 tekens bestaan.</small>
         </div>
       </div>
-      <br />
-      <br />
     </div>
-
-    <div class="form-group">
+    <div class="form-group" style="margin-top: 20px">
       <button class="btn btn-lg">Opslaan</button>
     </div>
   </form>
